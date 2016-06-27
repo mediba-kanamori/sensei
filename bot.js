@@ -10,14 +10,30 @@ controller.spawn({
   token: process.env.token,
 }).startRTM();
 
-const scriptDir = path.resolve('.', 'scripts');
-const scripts = fs.readdirSync(scriptDir).sort();
+const pluginsPath = path.resolve('.', 'scripts');
+const plugins = fs.readdirSync(pluginsPath).sort();
 
-scripts.forEach((file) => {
+const helps = plugins.map((file) => {
   const ext = path.extname(file);
-  const filePath = path.join(scriptDir, path.basename(file, ext));
-  controller.log.info(`** Loading script: ${filePath}`);
+  const pluginPath = path.join(pluginsPath, path.basename(file, ext));
+  controller.log.info(`** Loading script: ${pluginPath}`);
 
-  const script = require(filePath); // eslint-disable-line global-require
-  script.run(controller);
+  const plugin = require(pluginPath); // eslint-disable-line global-require
+  plugin.run(controller);
+
+  return plugin.help.join('\n');
 });
+
+controller.hears(['help ?(.*)'],
+  ['direct_message', 'direct_mention', 'mention'],
+  (bot, msg) => {
+    bot.startTyping(msg);
+
+    const regex = RegExp(msg.match[1], 'gi');
+    const results = helps.filter((help) => {
+      const conditions = help.toString().search(regex) !== -1;
+      return conditions;
+    });
+
+    bot.reply(msg, results.join('\n'));
+  });
