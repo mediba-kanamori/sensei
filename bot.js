@@ -24,8 +24,7 @@ const helps = plugins.map((file) => {
   return plugin.help.join('\n');
 });
 
-controller.hears(['help ?(.*)'],
-  ['direct_message', 'direct_mention', 'mention'],
+controller.hears(['help ?(.*)'], ['direct_message', 'direct_mention'],
   (bot, msg) => {
     bot.startTyping(msg);
 
