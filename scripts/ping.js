@@ -6,7 +6,7 @@ module.exports = class Ping {
   }
 
   static run(controller) {
-    controller.hears('^ping$', 'direct_message', (bot, msg) => {
+    controller.hears('^ping$', ['ambient', 'direct_message'], (bot, msg) => {
       bot.reply(msg, 'PONG');
     });
   }
