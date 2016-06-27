@@ -7,7 +7,7 @@ const controller = global.controller = botkit.slackbot({
 });
 
 controller.spawn({
-  token: process.env.token,
+  token: process.env.SLACK_BOT_TOKEN,
 }).startRTM();
 
 const pluginsPath = path.resolve('.', 'scripts');
