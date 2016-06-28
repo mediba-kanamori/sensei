@@ -21,7 +21,7 @@ const helps = plugins.map((file) => {
   const plugin = require(pluginPath); // eslint-disable-line global-require
   plugin.run(controller);
 
-  return plugin.help.join('\n');
+  return plugin.help ? plugin.help.join('\n') : '';
 });
 
 controller.hears(['help ?(.*)'], ['direct_message', 'direct_mention'],
@@ -30,7 +30,7 @@ controller.hears(['help ?(.*)'], ['direct_message', 'direct_mention'],
 
     const regex = RegExp(msg.match[1], 'gi');
     const results = helps.filter((help) => {
-      const conditions = help.toString().search(regex) !== -1;
+      const conditions = help && help.search(regex) !== -1;
       return conditions;
     });
 
