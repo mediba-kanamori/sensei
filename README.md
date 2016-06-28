@@ -6,6 +6,9 @@
 
 - Botkit
 - Node.js v6.2.2
+- Heroku Add-ons
+  - New Relic APM - Free Dynoの居眠り防止ping用
+  - Process Scheduler - 暫定で9時に起床して18時に寝る
 
 # つかいかた
 
