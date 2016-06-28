@@ -10,6 +10,9 @@ controller.spawn({
   token: process.env.SLACK_BOT_TOKEN,
 }).startRTM();
 
+// keepaliveでpingを受けるためのサーバ
+controller.setupWebserver(process.env.PORT || 8080);
+
 const pluginsPath = path.resolve('.', 'scripts');
 const plugins = fs.readdirSync(pluginsPath).sort();
 
