@@ -21,7 +21,7 @@ const helps = plugins.map((file) => {
   const pluginPath = path.join(pluginsPath, path.basename(file, ext));
   controller.log.info(`** Loading script: ${pluginPath}`);
 
-  const plugin = require(pluginPath); // eslint-disable-line global-require
+  const plugin = new (require(pluginPath)); // eslint-disable-line global-require
   plugin.run(controller);
 
   return plugin.help ? plugin.help.join('\n') : '';

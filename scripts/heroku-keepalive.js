@@ -1,5 +1,5 @@
 module.exports = class HerokuKeepalive {
-  static run(controller) {
+  run(controller) {
     controller.webserver.get('/heroku/keepalive', (req, res) => {
       res.send('OK');
     });
