@@ -14,3 +14,4 @@
 
 1. 環境変数に`SLACK_BOT_TOKEN`を設定する
 1. `npm start`
+1. Readonlyにしたいチャンネルがある場合は、`config.js`に追記する
