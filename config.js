@@ -1,5 +1,5 @@
 module.exports = {
   readonlyChannels: [
-    'notification',
+    'team_au-game_notice',
   ],
 };
